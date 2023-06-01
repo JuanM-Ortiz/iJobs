@@ -12,6 +12,8 @@ class VacantController extends Controller
      */
     public function index()
     {
+       $this->authorize('viewAny', Vacant::class);
+
         return view('vacants.index');
     }
 
@@ -20,15 +22,19 @@ class VacantController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Vacant::class);
+
         return view('vacants.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function show(string $id)
+    public function show(Vacant $vacant)
     {
-        //
+        return view('vacants.show', [
+            'vacant' => $vacant
+        ]);
     }
 
     /**
